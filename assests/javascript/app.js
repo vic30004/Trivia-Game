@@ -88,23 +88,30 @@ else {
         let text= $(this).text();
         answerPicked.push(text)
         console.log(answerPicked)
-        for (let i = 0; i < rightAnswers.length; i++) {
+       
+        found= false;
+        for (let i=0; i<rightAnswers.length; i++){
             if (answerPicked[0] === rightAnswers[i]) {
-               results.correctAnswers++
-               console.log(rightAnswers[i])
-               return
+                results.correctAnswers++
+                found=true;
+               
+               console.log(results.correctAnswers)
+               console.log(rightAnswers)
+               break;
             }
-            else{
+        
                 
-                results.incorrectAnswers++ 
-                
-                
+
+
             }
-            
-        }
-    })
-}      
+            if(found){
+                results.incorrectAnswers++  
+            }
+           
+        })
     }
+}
+    
 
 
 
