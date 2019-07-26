@@ -64,56 +64,72 @@ function questionSelection() {
 }
 
 
+
+
+
 function createQuestions(question, parentId) {
-
-    if(questions.length === 0){
+    if (questions.length === 0) {
         endGame()
-        return}
-else {
-    let resultElement = "<div class='text-content' id='" + question.id + "'>";
-    resultElement += "<h3> " + question.q + "</h3>";
-    resultElement += "<div class='answers'>"
-    resultElement += "<p id='q1'>" + question.a1 + "</p>";
-    resultElement += "<p id='q1'>" + question.a2 + "</p>";
-    resultElement += "<p id='q1'>" + question.a3 + "</p>";
-    resultElement += "<p id='q1'>" + question.a4 + "</p>";
-    resultElement += "</div>"
-    resultElement += "</div>";
-    $("#" + parentId).append(resultElement);
-    
-    
-    $(".answers").on("click", "#q1", function () {
-        $(this).css("color", "red")
-        let answerPicked = [];
-        let text= $(this).text();
-        answerPicked.push(text)
-        console.log(answerPicked)
-       
-        found= false;
-        for (let i=0; i<rightAnswers.length; i++){
-            if (answerPicked[0] === rightAnswers[i]) {
-                results.correctAnswers++
-                found=true;
-               
-               console.log(results.correctAnswers)
-               console.log(rightAnswers)
-               break;
-            }
-        
+        return
+    }
+    else {
+        let time= 30;
+        let resultElement = "<div class='text-content' id='" + question.id + "'>";
+        resultElement+= "<span id='timer'>  </span>"
+        resultElement += "<h3> " + question.q + "</h3>";
+        resultElement += "<div class='answers'>"
+        resultElement += "<p id='q1'>" + question.a1 + "</p>";
+        resultElement += "<p id='q1'>" + question.a2 + "</p>";
+        resultElement += "<p id='q1'>" + question.a3 + "</p>";
+        resultElement += "<p id='q1'>" + question.a4 + "</p>";
+        resultElement += "</div>"
+        resultElement += "</div>";
+        $("#" + parentId).append(resultElement);
+
+        let timer = function(x) {
+            let check= false;
+            if(x === 0) {
+                results.unanswered++;
                 
-
-
-            }
-            if(found){
-                results.incorrectAnswers++  
+                questionSelection()
+                $("#"+question.id).empty();
+                check= true;
+               return;
             }
            
+           $("#timer").html(x)
+            return setTimeout(() => {timer(--x)}, 1000)
+           }
+           
+           timer(5);
+
+
+
+        $("#question.id").on("click", "#q1", function () {
+            $(this)[0]
+            let answerPicked = [];
+            let text = $(this).text();
+            answerPicked.push(text)
+            console.log(answerPicked)
+
+            found = false;
+            for (let i = 0; i < rightAnswers.length; i++) {
+                if (text === rightAnswers[i]) {
+                    
+                    found = true;
+                    results.correctAnswers++
+                    console.log(results.correctAnswers)
+                    console.log(rightAnswers)
+                    break;
+                }
+            }
+            if (found===false) {
+                results.incorrectAnswers++
+            }
+
         })
     }
 }
-    
-
-
 
 
 
@@ -136,18 +152,18 @@ $("#start").on("click", function () {
 
 });
 
-$("#questions").on("click", function(){
+$("#questions").on("click", function () {
     $(this).empty();
     questionSelection()
-    if(questions.lenght === 0){
+    if (questions.lenght === 0) {
         createClosingPage(results, "questions")
     }
 })
 
-function endGame(){
-        
-    createClosingPage(results, "questions")  
-    
+function endGame() {
+
+    createClosingPage(results, "questions")
+
 }
 
 
