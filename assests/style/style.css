@@ -1,6 +1,8 @@
 
-.answers:hover{
-color: grey;
+.answers .q1:hover{
+    background-color: grey;
+    cursor: pointer;
+
 }
 
 p{
