@@ -73,49 +73,47 @@ function createQuestions(question, parentId) {
         return
     }
     else {
-        let time= 30;
         let resultElement = "<div class='text-content' id='" + question.id + "'>";
-        resultElement+= "<span id='timer'>  </span>"
+        resultElement += "<span id='timer'>  </span>"
         resultElement += "<h3> " + question.q + "</h3>";
         resultElement += "<div class='answers'>"
-        resultElement += "<p id='q1'>" + question.a1 + "</p>";
-        resultElement += "<p id='q1'>" + question.a2 + "</p>";
-        resultElement += "<p id='q1'>" + question.a3 + "</p>";
-        resultElement += "<p id='q1'>" + question.a4 + "</p>";
+        resultElement += "<p class='q1'>" + question.a1 + "</p>";
+        resultElement += "<p class='q1'>" + question.a2 + "</p>";
+        resultElement += "<p class='q1'>" + question.a3 + "</p>";
+        resultElement += "<p class='q1'>" + question.a4 + "</p>";
         resultElement += "</div>"
         resultElement += "</div>";
         $("#" + parentId).append(resultElement);
 
-        let timer = function(x) {
-            let check= false;
-            if(x === 0) {
-                results.unanswered++;
-                
-                questionSelection()
-                $("#"+question.id).empty();
-                check= true;
-               return;
-            }
+        let timeLeft = 30;
+        let countDown = setInterval(function(){
+          $("#timer").html(timeLeft)
+          timeLeft -= 1;
+          if(timeLeft <= 0){
+            clearInterval(countDown);
+            results.unanswered++;
+            $("#"+question.id).empty();
+            questionSelection()
+          }
+        }, 1000);
            
-           $("#timer").html(x)
-            return setTimeout(() => {timer(--x)}, 1000)
-           }
-           
-           timer(5);
+       
+        
 
 
-
-        $("#question.id").on("click", "#q1", function () {
+        $("#" + question.id).on("click", ".q1", function () {
             $(this)[0]
             let answerPicked = [];
             let text = $(this).text();
             answerPicked.push(text)
             console.log(answerPicked)
+            clearInterval(countDown);
+
 
             found = false;
             for (let i = 0; i < rightAnswers.length; i++) {
-                if (text === rightAnswers[i]) {
-                    
+                if (answerPicked[0] === rightAnswers[i]) {
+
                     found = true;
                     results.correctAnswers++
                     console.log(results.correctAnswers)
@@ -123,7 +121,7 @@ function createQuestions(question, parentId) {
                     break;
                 }
             }
-            if (found===false) {
+            if (found === false) {
                 results.incorrectAnswers++
             }
 
@@ -148,6 +146,7 @@ function createClosingPage(result, parentId) {
 $("#start").on("click", function () {
     $("#start").css("display", "none")
     questionSelection();
+    
 
 
 });
