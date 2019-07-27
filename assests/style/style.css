@@ -1,10 +1,75 @@
 
+*{
+    box-sizing: border-box;
+}
+
+body,html{
+    height: 100%;
+   color: #FFFFFF;
+    background: url("/assests/pictures/craig-mclachlan-8B_DYG7Iaa4-unsplash.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding: 0 20px;
+  margin: 0 auto;
+  font-family: 'Rubik Mono One', cursive;
+  font-family: 'Skranji', 'Cantora One', cursive, Arial, Helvetica, sans-serif;
+ 
+}
+
+.page{
+    display: flex;
+    flex-flow: column nowrap;
+    width: 1080px;
+    margin: 100px auto;
+    border: 2px solid black;
+    background: rgba(31, 34, 30, 0.5);
+    color: white;
+}
+
 .answers .q1:hover{
-    background-color: grey;
-    cursor: pointer;
+    background: rgba(156, 160, 154, 0.5);
+    border-radius: 5%;
 
 }
 
-p{
-    border: 1px solid black;
+
+.title{
+    font-weight: bolder;
+    font-size: 30px;
 }
+
+.q1{
+   text-align: center;
+}
+
+.inform{
+    font-size: 30px;
+}
+
+img{
+    border-radius: 5%;
+}
+
+.text-content{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 20px auto;
+    font-size: 30px;
+   
+    
+ 
+   
+}
+.title{
+    text-align: center;
+}
+
+#timer{
+    font-size: 20px;
+}
+
