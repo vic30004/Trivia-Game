@@ -23,9 +23,10 @@ body,html{
     flex-flow: column nowrap;
     width: 1080px;
     margin: 100px auto;
-    border: 2px solid black;
+    border: 5px solid rgb(18, 19, 18);
     background: rgba(27, 29, 27, 0.5);
     color: white;
+    border-radius: 5px;
 }
 
 .answers .q1:hover{
@@ -73,3 +74,10 @@ img{
     font-size: 20px;
 }
 
+button{
+    background: rgb(63, 63, 63);
+    color: whitesmoke;
+    padding: 10px 30px;
+    border-radius: 5px;
+
+}
